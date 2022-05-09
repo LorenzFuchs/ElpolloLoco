@@ -68,7 +68,7 @@ class World {
                 
 
                 if (this.character.makeChickenDead(enemy)) {
-
+                    this.character.energy += 5;
                     let position = this.level.enemies.indexOf(enemy);
                     enemy.energy = 0;
                     setTimeout(() => {

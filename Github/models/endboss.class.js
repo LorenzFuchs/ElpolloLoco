@@ -35,6 +35,8 @@ class Endboss extends MovableObject {
         'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/4.Muerte/G26.png'
     ];
 
+    endboss_angry_sound = new Audio('audio/endboss_angry.mp3');
+
     
     
 
@@ -52,6 +54,7 @@ class Endboss extends MovableObject {
     animate() {
         setInterval(() => {
             this.moveLeft();
+            
         }, 1000 / 60);
         setInterval(() => {
             if(this.isDead()){
@@ -59,6 +62,7 @@ class Endboss extends MovableObject {
                 
             }else if(this.ishurt()) {
                 this.playAnimation(this.IMAGES_HURT);
+                this.endboss_angry_sound.play();
             } else {
                 this.playAnimation(this.IMAGES_WALKING1);
             }
