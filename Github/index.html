@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,19 +27,35 @@
     <script src="models/throwable-object.class.js"></script>
     <script src="levels/level.1.js"></script>
     <script src="js/game.js"></script>
-    
-    
+
+
 </head>
+
 <body>
-    <h1>El pollo loco</h1>
+    <h1 id="headline">El pollo loco</h1>
     <div class="container">
-    <canvas id="canvas" width="720" height="480">
-    </canvas>
-    <img id="fullScreen" onclick="startFullscreen()" class="fullScreen d-none" src="img/fullscreen-12-64.png" alt="">
+        <div id="startButton" onclick="init()" class="wrapper">
+            <div id="pulse" class="pulse"> <i class="fa fa-plus">Start</i> </div>
+        </div>
+        <canvas id="canvas" width="720" height="480">
+        </canvas>
+        <img id="fullScreen" onclick="startFullscreen()" class="fullScreen d-none" src="img/fullscreen-12-64.png"
+            alt="">
     </div>
-    
-    <div id="startButton" onclick="init()" class="wrapper">
-        <div id="pulse" class="pulse"> <i class="fa fa-plus">Start</i> </div>
+    <div class="panel">
+        <div>
+            <button id="btnLeft" type="image">LEFT</button>
+            <button id="btnRight" type="image">RIGHT</button>
+        </div>
+        <div>
+            <button id="btnUp" type="image">UP</button>
+            <button id="btnThrow" type="image">THROW</button>
+        </div>
+
+
     </div>
+
+   
 </body>
+
 </html>

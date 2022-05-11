@@ -10,9 +10,11 @@ function init() {
     document.getElementById('canvas').style.background = 'none';
     document.getElementById('fullScreen').classList.remove('d-none');
     document.getElementById('pulse').classList.add('d-none');
+    document.getElementById('startButton').style.marginTop = '0';
+    document.getElementById('headline').style.position = 'absolute';
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
-    
+    touchCursors();
     console.log('My Character is', world.character);                                     //man kann auch world['character'] schreiben um auf das JSON zuzugreifen!!
 }
 
@@ -60,3 +62,60 @@ window.addEventListener("keyup", (e) => {                                       
     }
     //console.log(e);
 });
+
+
+function touchCursors(){
+document.getElementById('btnLeft').addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    keyboard.LEFT = true;
+
+});
+
+document.getElementById('btnLeft').addEventListener('touchend', (e) => {
+    e.preventDefault();
+    keyboard.LEFT = false;
+
+});
+
+document.getElementById('btnRight').addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    keyboard.RIGHT = true;
+
+});
+
+document.getElementById('btnRight').addEventListener('touchend', (e) => {
+    e.preventDefault();
+    keyboard.RIGHT = false;
+
+});
+
+document.getElementById('btnRight').addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    keyboard.RIGHT = true;
+
+});
+
+document.getElementById('btnUp').addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    keyboard.SPACE = true;
+
+});
+
+document.getElementById('btnUp').addEventListener('touchend', (e) => {
+    e.preventDefault();
+    keyboard.SPACE = false;
+
+});
+
+document.getElementById('btnThrow').addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    keyboard.D = true;
+
+});
+
+document.getElementById('btnThrow').addEventListener('touchend', (e) => {
+    e.preventDefault();
+    keyboard.D = false;
+
+});
+}
