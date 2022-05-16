@@ -16,7 +16,7 @@ class Chicken extends MovableObject {
     constructor() {
         super().loadImage('img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/1.Ga_paso_derecho.png');
 
-        this.x = 200 + Math.random() * 500;          // Zufällige Zahl zwischen 200 und 700 für die X-Koordinate
+        this.x = 600 + Math.random() * 1200;          // Zufällige Zahl zwischen 200 und 700 für die X-Koordinate
         this.speed = 0.15 + Math.random() * 0.25 ;   // Math.random ist eine zufällige Zahl zwischen 0 und 1;
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_DEAD);

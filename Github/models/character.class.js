@@ -85,7 +85,12 @@ class Character extends MovableObject {
         setInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
+                document.getElementById('gameOverScreen').classList.remove('d-none');
                 this.death_sound.play();
+                this.hurt_sound.pause();
+                setTimeout(() => {
+                    this.death_sound.pause();
+                }, 3000);
                 
             }
             else if (this.ishurt()) {

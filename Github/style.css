@@ -16,6 +16,9 @@ canvas {
 
 .container {
     position: relative;
+    display: flex;
+    justify-content: center;
+
 }
 
 
@@ -26,6 +29,7 @@ canvas {
     bottom: 5px;
     height: 30px;
     cursor: pointer;
+    z-index: 5;
 
 
 }
@@ -38,17 +42,18 @@ canvas {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 30px;
+    margin-top: 20px;
     position: absolute;
-    left: 285px;
+    
 }
 
 .pulse {
     width: 150px;
     height: 70px;
-    background-color: #85a030;
+    background-color: lightgreen;
     position: relative;
-    animation: animate 3s linear infinite
+    animation: animate 3s linear infinite;
+    border-radius: 100%;
 }
 
 .pulse i {
@@ -57,16 +62,89 @@ canvas {
     justify-content: center;
     align-items: center;
     font-size: 30px;
-    color: #fff;
     height: 100%;
     cursor: pointer
 }
 
 .panel {
     display: flex;
-    justify-content: space-between;
-    width: 720px;
+    justify-content: space-around;
+    width: 100%;
+    position: absolute;
+    bottom: 5px;
 }
+
+#btnLeft {
+    background-image: url(img/arrows/arrow_left.png);
+    border-radius: 100%;
+    background-color: lightgreen;
+    height: 30px;
+    width: 30px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 25px;
+    padding: 20px;
+}
+
+#btnRight {
+    background-image: url(img/arrows/arrow_right.png);
+    border-radius: 100%;
+    background-color: lightgreen;
+    height: 30px;
+    width: 30px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 25px;
+    padding: 20px;
+}
+
+#btnUp {
+    background-image: url(img/arrows/arrow_up.png);
+    border-radius: 100%;
+    background-color: lightgreen;
+    height: 30px;
+    width: 30px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 25px;
+    padding: 20px;
+}
+
+#btnThrow {
+    background-image: url(img/arrows/arrow_throw.png);
+    border-radius: 100%;
+    background-color: lightgreen;
+    height: 30px;
+    width: 30px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 25px;
+    padding: 20px;
+}
+
+.gameOverScreen{
+    height: 100%;
+    width: 100%;
+    background-image: url('img/9.Intro _ Outro Image/_Game over_ screen/1.you lost.png');
+    position: absolute;
+    background-color: black;
+    opacity: 0.8;
+    background-position: center;
+    background-size: cover;
+}
+
+.controlPanel img{
+height: 30px;
+width: 30px;
+margin-right: 10px;
+}
+
+.controlPanel div {
+    display: flex;
+    align-items: center;
+}
+
+
 
 @keyframes animate {
     0% {
@@ -101,6 +179,7 @@ canvas {
         height: 100vh;
     }
 }
+
 
 
 

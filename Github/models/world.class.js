@@ -67,16 +67,19 @@ class World {
                 this.statusBar.setPercentage(this.character.energy);
                 
 
-                if (this.character.makeChickenDead(enemy)) {
+                if (this.character.makeChickenDead(enemy))  {
                     this.character.energy += 5;
-                    let position = this.level.enemies.indexOf(enemy);
                     enemy.energy = 0;
-                    setTimeout(() => {
-                        this.level.enemies.splice(position, 1);
-                        this.chicken_death_sound.play();
-                    }, 1000 / 3);
+                    
+                        let position = this.level.enemies.indexOf(enemy);
+                    this.level.enemies.splice(position, 1);
+                    console.log(enemy, 'verschwindet');
+                    this.chicken_death_sound.play();
+                    
+                    
+                    
 
-                    console.log('Energie Huhn', enemy.energy);
+                   
 
 
                 }
@@ -101,7 +104,6 @@ class World {
         this.level.bottles.forEach(bottle => {                                       //checkt für jeden Gegner ob er mit dem Character kollidiert
             if (this.character.isColliding(bottle)) {
                 let position = this.level.bottles.indexOf(bottle);
-                console.log('Position', position);
                 this.collect_bottles_sound.play();
                 this.level.bottles.splice(position, 1);
                 this.bottles.hit_objects();
@@ -119,7 +121,6 @@ class World {
                 this.endboss.hit();
                 this.statusBarEndboss.setPercentage(this.endboss.energy);
                 if (this.endboss.energy == 0) {
-                    console.log('Endboss tot');
                     this.chicken_death_sound.play();
                     let position = this.level.enemies.indexOf('Endboss');
                     setTimeout(() => {
@@ -127,8 +128,10 @@ class World {
                     }, 1000);
 
                 }
-
+                
             }
+
+            
         });
 
 

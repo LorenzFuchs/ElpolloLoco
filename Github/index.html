@@ -32,8 +32,8 @@
 </head>
 
 <body>
-    <h1 id="headline">El pollo loco</h1>
     <div class="container">
+        <div id="gameOverScreen" class="gameOverScreen d-none"></div>
         <div id="startButton" onclick="init()" class="wrapper">
             <div id="pulse" class="pulse"> <i class="fa fa-plus">Start</i> </div>
         </div>
@@ -41,21 +41,33 @@
         </canvas>
         <img id="fullScreen" onclick="startFullscreen()" class="fullScreen d-none" src="img/fullscreen-12-64.png"
             alt="">
-    </div>
-    <div class="panel">
-        <div>
-            <button id="btnLeft" type="image">LEFT</button>
-            <button id="btnRight" type="image">RIGHT</button>
+        <div class="panel">
+            <div>
+                <button id="btnLeft" type="image"></button>
+                <button id="btnRight" type="image"></button>
+            </div>
+            <div>
+                <button id="btnUp" type="image"></button>
+                <button id="btnThrow" type="image"></button>
+            </div>
+
+
         </div>
-        <div>
-            <button id="btnUp" type="image">UP</button>
-            <button id="btnThrow" type="image">THROW</button>
+    </div>
+    
+    <div id="controlPanel">
+        <h1>Control Panel</h1>
+        <div class="controlPanel">
+            <div><img src="img/arrows/arrow_left.png">GO LEFT</div>
+            <div><img src="img/arrows/arrow_right.png">GO RIGHT</div>
+            <div><img src="img/arrows/arrow_up.png">JUMP</div>
+            <div><img src="img/arrows/arrow_throw.png">THROW</div>
+
+
         </div>
-
-
     </div>
 
-   
+
 </body>
 
 </html>

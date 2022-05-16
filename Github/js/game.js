@@ -11,7 +11,7 @@ function init() {
     document.getElementById('fullScreen').classList.remove('d-none');
     document.getElementById('pulse').classList.add('d-none');
     document.getElementById('startButton').style.marginTop = '0';
-    document.getElementById('headline').style.position = 'absolute';
+    document.getElementById('controlPanel').classList.add('d-none');
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
     touchCursors();
