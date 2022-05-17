@@ -42,12 +42,45 @@ class Character extends MovableObject {
 
     ];
 
+    IMAGES_SLEEPING = [
+        'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/LONG_IDLE/I-11.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/LONG_IDLE/I-12.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/LONG_IDLE/I-13.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/LONG_IDLE/I-14.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/LONG_IDLE/I-15.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/LONG_IDLE/I-16.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/LONG_IDLE/I-17.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/LONG_IDLE/I-18.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/LONG_IDLE/I-19.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/LONG_IDLE/I-20.png'
+    ];
+
+    IMAGES_WAITING = [
+        'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-1.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-2.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-3.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-4.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-5.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-6.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-7.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-8.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-9.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-10.png',
+
+    ];
+
+    
+    last_Right = 0;
     
 
     world;
     walking_sound = new Audio('audio/running.mp3');
     hurt_sound = new Audio('audio/hurt.mp3');
     death_sound = new Audio('audio/dead.mp3');
+
+    checkTime = 0;
+    checkTime1 = 0;
+    resultTime = 0;
 
 
 
@@ -58,6 +91,8 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
+        this.loadImages(this.IMAGES_SLEEPING);
+        this.loadImages(this.IMAGES_WAITING);
         this.applyGravity();
         this.animate();
     }
@@ -67,20 +102,26 @@ class Character extends MovableObject {
             this.walking_sound.pause();
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
+                this.checkTime1 = new Date().getTime();
                 this.walking_sound.play();
                 this.otherDirection = false;
             }
             if (this.world.keyboard.LEFT && this.x > 0) {
                 this.moveLeft();
+                this.checkTime1 = new Date().getTime();
                 this.walking_sound.play();
                 this.otherDirection = true;
             }
 
             if (this.world.keyboard.SPACE && !this.isAboveGround()) {          //ein "!" davor, verneint das ganze
+                this.checkTime1 = new Date().getTime();
                 this.jump();
             }
             this.world.camera_x = -this.x + 100;                          //Kameraausschnitt verschieben, sobald Character bewegt wird
         }, 1000 / 60);
+
+
+        
 
         setInterval(() => {
             if (this.isDead()) {
@@ -106,8 +147,26 @@ class Character extends MovableObject {
 
                     //walk animation
                     this.playAnimation(this.IMAGES_WALKING);
+                } else if(!this.world.keyboard.SPACE && !this.world.keyboard.LEFT && !this.world.keyboard.RIGHT && this.resultTime  < 3000){
+                    this.playAnimation(this.IMAGES_WAITING);
+                    
+            
+            
+                } else if(this.resultTime > 3000){
+                    this.playAnimation(this.IMAGES_SLEEPING);
                 }
+                
+                
+                
+                
             }
+            
+            
+            
+            this.checkTime = new Date().getTime();
+            this.resultTime = this.checkTime - this.checkTime1;
+            console.log(this.resultTime);
+            
         }, 50);
 
     }

@@ -172,6 +172,9 @@ margin-right: 10px;
     canvas {
         width: 100%;
     }
+    .fullScreen {
+        display: none;
+    }
 }
 
 @media only screen and (max-height: 480px) {
