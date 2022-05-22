@@ -42,19 +42,19 @@ class MovableObject extends DrawableObject {
         return this.x + this.width > mo.x &&
         this.y + this.height > mo.y &&
         this.x < mo.x &&
-        this.y < mo.y + mo.height;
+        this.y < mo.y + mo.height &&
+        this.y + this.height > mo.y + mo.height;
         
     }
 
     makeChickenDead(mo){
-        return this.x + this.width > mo.x + mo.width &&
+        
+        return this.x + this.width > mo.x &&
+        this.y + this.height > mo.y &&
         this.x < mo.x &&
-        this.x < mo.x + mo.width &&
-        this.x + this.width > mo.x &&
-        this.y < mo.y &&
         this.y < mo.y + mo.height &&
-        this.y + this.height < mo.y + mo.height &&
-        this.y + this.height > mo.y;
+        this.y + this.height < mo.y + mo.height;
+        
     } 
 
     

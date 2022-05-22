@@ -30,7 +30,7 @@ class World {
         setInterval(() => {
             this.game_Sound.play();
         }, 100);
-        
+
 
     }
 
@@ -61,29 +61,24 @@ class World {
     }
 
     checkCollisions() {
+        if (this.level.bottles.length == 0 && this.endboss.energy > 0 && this.bottles.energy_objects == 0) {
+            document.getElementById('gameOverScreen').classList.remove('d-none');
+        }
         this.level.enemies.forEach(enemy => {                                       //checkt für jeden Gegner ob er mit dem Character kollidiert
-            if (this.character.isColliding(enemy)) {
+            if (this.character.isColliding(enemy) && !this.character.makeChickenDead(enemy)) {
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy);
-                
-
-                if (this.character.makeChickenDead(enemy))  {
-                    this.character.energy += 5;
-                    enemy.energy = 0;
-                    
-                        let position = this.level.enemies.indexOf(enemy);
-                    this.level.enemies.splice(position, 1);
-                    console.log(enemy, 'verschwindet');
-                    this.chicken_death_sound.play();
-                    
-                    
-                    
-
-                   
 
 
-                }
 
+            } else if (!this.character.makeChickenDead(this.endboss) && this.character.makeChickenDead(enemy)) {
+
+                enemy.energy = 0;
+
+                let position = this.level.enemies.indexOf(enemy);
+                this.level.enemies.splice(position, 1);
+                console.log(enemy, 'verschwindet');
+                this.chicken_death_sound.play();
 
             }
         });
@@ -102,6 +97,7 @@ class World {
         });
 
         this.level.bottles.forEach(bottle => {                                       //checkt für jeden Gegner ob er mit dem Character kollidiert
+
             if (this.character.isColliding(bottle)) {
                 let position = this.level.bottles.indexOf(bottle);
                 this.collect_bottles_sound.play();
@@ -128,10 +124,10 @@ class World {
                     }, 1000);
 
                 }
-                
+
             }
 
-            
+
         });
 
 

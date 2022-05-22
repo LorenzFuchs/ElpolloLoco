@@ -165,7 +165,7 @@ class Character extends MovableObject {
             
             this.checkTime = new Date().getTime();
             this.resultTime = this.checkTime - this.checkTime1;
-            console.log(this.resultTime);
+            
             
         }, 50);
 

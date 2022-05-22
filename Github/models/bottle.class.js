@@ -1,5 +1,5 @@
 class Bottles extends MovableObject {
-   y = 340;
+   y = 330;
     
     
     IMAGE = 'img/6.botella/2.Botella_enterrada2.png';

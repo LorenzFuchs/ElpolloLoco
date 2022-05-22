@@ -1,7 +1,7 @@
 class Endboss extends MovableObject {
     height = 400;
     width = 250;
-    y = 60;
+    y = 35;
 
     IMAGES_WALKING = [
         'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/2.Ateción-ataque/1.Alerta/G6.png',
@@ -59,6 +59,7 @@ class Endboss extends MovableObject {
         setInterval(() => {
             if(this.isDead()){
                 this.playAnimation(this.IMAGES_DEAD);
+                document.getElementById('gameOverScreen').classList.remove('d-none');
                 
             }else if(this.ishurt()) {
                 this.playAnimation(this.IMAGES_HURT);
