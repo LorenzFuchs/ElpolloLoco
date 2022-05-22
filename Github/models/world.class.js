@@ -71,7 +71,7 @@ class World {
 
 
 
-            } else if (!this.character.makeChickenDead(this.endboss) && this.character.makeChickenDead(enemy)) {
+            } else if (!this.character.makeChickenDead(this.endboss) && this.character.makeChickenDead(enemy) && !this.character.isColliding(enemy))  {
 
                 enemy.energy = 0;
 
