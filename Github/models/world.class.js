@@ -19,6 +19,8 @@ class World {
     collect_bottles_sound = new Audio('audio/collect_bottles.mp3');
 
     throwableObjects = [];
+    is_play = true;
+    
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');                                             //alle definierten Variablen in einer Klasse, muss man in der Funktion mit this. öffnen!!
@@ -27,10 +29,18 @@ class World {
         this.draw();
         this.setWorld();
         this.run();
-        setInterval(() => {
-            this.game_Sound.play();
-        }, 100);
 
+       
+        setInterval(() => {
+            if(this.is_play){
+            this.game_Sound.play();
+            } else if (!this.is_play){
+                this.game_Sound.pause();
+                
+            } 
+        }, 100);
+       
+       
 
     }
 
@@ -56,35 +66,55 @@ class World {
                 this.bottles.energy_objects -= 20;
                 this.statusBarBottles.setPercentage(this.bottles.energy_objects);
                 console.log('Bottle', this.bottles.energy_objects);
+                
             }
+            
         }
     }
 
     checkCollisions() {
         if (this.level.bottles.length == 0 && this.endboss.energy > 0 && this.bottles.energy_objects == 0) {
-            document.getElementById('gameOverScreen').classList.remove('d-none');
+            document.getElementById('retry_again').classList.remove('d-none');
+            document.getElementById('retry_again').classList.add('d-flex');
+            this.is_play = false;
+            
+            setTimeout(() => {
+                location.reload();
+            }, 5000);
         }
         this.level.enemies.forEach(enemy => {                                       //checkt für jeden Gegner ob er mit dem Character kollidiert
-            if (this.character.isColliding(enemy) && !this.character.makeChickenDead(enemy)) {
+            if (this.is_play && this.character.isCollidingEndboss(this.endboss) || this.character.isColliding(enemy) && !this.character.makeChickenDead(enemy) && !enemy.energy == 0) {
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy);
 
 
 
-            } else if (!this.character.makeChickenDead(this.endboss) && this.character.makeChickenDead(enemy) && !this.character.isColliding(enemy))  {
+            } else if (this.is_play && !this.character.makeChickenDead(this.endboss) && this.character.makeChickenDead(enemy) && !this.character.isColliding(enemy) && !enemy.energy == 0)  {
 
                 enemy.energy = 0;
+                
+                
+                
+                
+                
+                    setTimeout(() => {
+                        let position = this.level.enemies.indexOf(enemy);
+                        this.level.enemies.splice(position, 1);
+                        console.log(position, 'verschwindet');
+                    }, 1000);
 
-                let position = this.level.enemies.indexOf(enemy);
-                this.level.enemies.splice(position, 1);
-                console.log(enemy, 'verschwindet');
+                    
+                    
+                    console.log('das ist energie', enemy.energy);
+                
+                
                 this.chicken_death_sound.play();
 
             }
         });
 
         this.level.coins.forEach(coin => {                                       //checkt für jeden Gegner ob er mit dem Character kollidiert
-            if (this.character.isColliding(coin)) {
+            if (this.is_play && this.character.isColliding(coin) && this.coins.energy_objects < 100) {
                 let position = this.level.coins.indexOf(coin);
                 this.level.coins.splice(position, 1);
                 this.coins.hit_objects();
@@ -98,7 +128,7 @@ class World {
 
         this.level.bottles.forEach(bottle => {                                       //checkt für jeden Gegner ob er mit dem Character kollidiert
 
-            if (this.character.isColliding(bottle)) {
+            if (this.is_play && this.character.isColliding(bottle) && this.bottles.energy_objects < 100) {
                 let position = this.level.bottles.indexOf(bottle);
                 this.collect_bottles_sound.play();
                 this.level.bottles.splice(position, 1);
@@ -113,7 +143,7 @@ class World {
 
 
         this.throwableObjects.forEach(throwableObject => {                                       //checkt für jeden Gegner ob er mit dem Character kollidiert
-            if (this.endboss.isColliding(throwableObject)) {
+            if (this.is_play && this.endboss.isColliding(throwableObject)) {
                 this.endboss.hit();
                 this.statusBarEndboss.setPercentage(this.endboss.energy);
                 if (this.endboss.energy == 0) {

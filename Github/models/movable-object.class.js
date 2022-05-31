@@ -39,12 +39,24 @@ class MovableObject extends DrawableObject {
 
     //character.isColliding(chicken);
     isColliding(mo){
+        if(mo == Chicken || Chick || Coins || Bottles){
         return this.x + this.width > mo.x &&
         this.y + this.height > mo.y &&
         this.x < mo.x &&
         this.y < mo.y + mo.height &&
         this.y + this.height > mo.y + mo.height;
-        
+        }
+    }
+
+    isCollidingEndboss(mo){
+         return this.x < mo.x &&
+        this.x + this.width > mo.x &&
+        this.y > mo.y &&
+        this.y + this.height < mo.y + mo.height ||
+        this.y > mo.y &&
+        this.y + this.height < mo.y + mo.height &&
+        this.x < mo.x + mo.width &&
+        this.x + this.width > mo.x + mo.width;
     }
 
     makeChickenDead(mo){

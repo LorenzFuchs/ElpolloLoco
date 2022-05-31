@@ -133,6 +133,30 @@ canvas {
     background-size: cover;
 }
 
+.retry_again{
+    position: absolute;
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+    background-color: #484848;
+    justify-content: center;
+    align-items: center;
+    font-size: 60px;
+    
+    
+}
+
+.retry_again span {
+    text-align: center;
+    color: rgb(238, 158, 10);
+    opacity: 1;
+    font-weight: bold;
+}
+
+.d-flex {
+    display: flex;
+}
+
 .controlPanel img{
 height: 30px;
 width: 30px;

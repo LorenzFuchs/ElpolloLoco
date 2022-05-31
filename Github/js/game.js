@@ -19,6 +19,8 @@ function init() {
 }
 
 
+
+
 window.addEventListener("keydown", (e) => {                                              // keydown bedeutet Taste ist gedrückt
     if(e.keyCode == 39) {                                                                // die Zahlen 32, 37, 38, 39, 40 sind die Keycode zahlen aus der Konsole ausgelesen; Jede Taste hat eine bestimmte Nummer den "keycode"
         keyboard.RIGHT = true;
