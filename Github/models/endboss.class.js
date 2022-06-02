@@ -59,7 +59,7 @@ class Endboss extends MovableObject {
         setInterval(() => {
             if(this.isDead()){
                 this.playAnimation(this.IMAGES_DEAD);
-                document.getElementById('gameOverScreen').classList.remove('d-none');
+                document.getElementById('youWinScreen').classList.remove('d-none');
                 
             }else if(this.ishurt()) {
                 this.playAnimation(this.IMAGES_HURT);

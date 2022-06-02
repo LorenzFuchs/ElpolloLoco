@@ -19,9 +19,7 @@ class DrawableObject {
     drawFrame(ctx){
         if(this instanceof Character || this instanceof Chicken || this instanceof Chick || this instanceof Coins || this instanceof Bottles || this instanceof Endboss || this instanceof ThrowableObject){                            //der Befehl instanceof wählt gewisse Elemente aus, für die die Funktion gelten soll
         ctx.beginPath();                                                                     //in diesem Fall für Character und Chicken
-        ctx.lineWidth = '5';
-        ctx.strokeStyle = 'blue';
-        ctx.rect(this.x, this.y, this.width, this.height);
+        
         ctx.stroke();
         }
     }

@@ -168,6 +168,16 @@ margin-right: 10px;
     align-items: center;
 }
 
+.youWinScreen{
+    height: 100%;
+    width: 100%;
+    background-image: url('img/9.Intro _ Outro Image/You_win.png');
+    position: absolute;
+    background-color: black;
+    opacity: 0.8;
+    background-position: center;
+    background-size: cover;
+}
 
 
 @keyframes animate {

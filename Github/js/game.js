@@ -2,6 +2,8 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 
+
+
 function startFullscreen() {
     canvas.requestFullscreen();
 }
@@ -39,6 +41,10 @@ window.addEventListener("keydown", (e) => {                                     
     }
     if(e.keyCode == 68) {
         keyboard.D = true;
+        
+        
+    
+        
     }
     //console.log(e);
 });

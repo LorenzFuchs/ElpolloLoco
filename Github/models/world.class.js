@@ -20,7 +20,7 @@ class World {
 
     throwableObjects = [];
     is_play = true;
-    
+
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');                                             //alle definierten Variablen in einer Klasse, muss man in der Funktion mit this. öffnen!!
@@ -30,17 +30,17 @@ class World {
         this.setWorld();
         this.run();
 
-       
+
         setInterval(() => {
-            if(this.is_play){
-            this.game_Sound.play();
-            } else if (!this.is_play){
+            if (this.is_play) {
+                this.game_Sound.play();
+            } else if (!this.is_play) {
                 this.game_Sound.pause();
-                
-            } 
+
+            }
         }, 100);
-       
-       
+
+
 
     }
 
@@ -66,18 +66,21 @@ class World {
                 this.bottles.energy_objects -= 20;
                 this.statusBarBottles.setPercentage(this.bottles.energy_objects);
                 console.log('Bottle', this.bottles.energy_objects);
-                
+
             }
-            
+
         }
     }
 
     checkCollisions() {
-        if (this.level.bottles.length == 0 && this.endboss.energy > 0 && this.bottles.energy_objects == 0) {
-            document.getElementById('retry_again').classList.remove('d-none');
-            document.getElementById('retry_again').classList.add('d-flex');
-            this.is_play = false;
-            
+        if (this.level.bottles.length == 0 && this.endboss.energy > 10  && this.bottles.energy_objects == 0) {
+            setTimeout(() => {
+                document.getElementById('retry_again').classList.remove('d-none');
+                document.getElementById('retry_again').classList.add('d-flex');
+                this.is_play = false;
+            }, 2000);
+
+
             setTimeout(() => {
                 location.reload();
             }, 5000);
@@ -89,25 +92,25 @@ class World {
 
 
 
-            } else if (this.is_play && !this.character.makeChickenDead(this.endboss) && this.character.makeChickenDead(enemy) && !this.character.isColliding(enemy) && !enemy.energy == 0)  {
+            } else if (this.is_play && !this.character.makeChickenDead(this.endboss) && this.character.makeChickenDead(enemy) && !this.character.isColliding(enemy) && !enemy.energy == 0) {
 
                 enemy.energy = 0;
-                
-                
-                
-                
-                
-                    setTimeout(() => {
-                        let position = this.level.enemies.indexOf(enemy);
-                        this.level.enemies.splice(position, 1);
-                        console.log(position, 'verschwindet');
-                    }, 1000);
 
-                    
-                    
-                    console.log('das ist energie', enemy.energy);
-                
-                
+
+
+
+
+                setTimeout(() => {
+                    let position = this.level.enemies.indexOf(enemy);
+                    this.level.enemies.splice(position, 1);
+                    console.log(position, 'verschwindet');
+                }, 1000);
+
+
+
+                console.log('das ist energie', enemy.energy);
+
+
                 this.chicken_death_sound.play();
 
             }
@@ -145,6 +148,7 @@ class World {
         this.throwableObjects.forEach(throwableObject => {                                       //checkt für jeden Gegner ob er mit dem Character kollidiert
             if (this.is_play && this.endboss.isColliding(throwableObject)) {
                 this.endboss.hit();
+                console.log('Energie_Endboss', this.endboss.energy);
                 this.statusBarEndboss.setPercentage(this.endboss.energy);
                 if (this.endboss.energy == 0) {
                     this.chicken_death_sound.play();
