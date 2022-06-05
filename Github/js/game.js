@@ -1,7 +1,8 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
-
+let THROW_REQUEST_STOP = new Date().getTime();
+let THROW_REQUEST_START = 0;
 
 
 function startFullscreen() {
@@ -40,7 +41,15 @@ window.addEventListener("keydown", (e) => {                                     
         keyboard.SPACE = true;
     }
     if(e.keyCode == 68) {
-        keyboard.D = true;
+        
+        if(THROW_REQUEST_STOP > THROW_REQUEST_START && !keyboard.D) {
+            if((new Date().getTime() - THROW_REQUEST_START) > 1000){
+                THROW_REQUEST_START = new Date().getTime();
+            }
+            keyboard.D = true;
+        }
+        
+        
         
         
     
@@ -66,6 +75,7 @@ window.addEventListener("keyup", (e) => {                                       
         keyboard.SPACE = false;
     }
     if(e.keyCode == 68) {
+        THROW_REQUEST_STOP = new Date().getTime();
         keyboard.D = false;
     }
     //console.log(e);

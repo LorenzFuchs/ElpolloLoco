@@ -56,12 +56,13 @@ class World {
     }
 
     checkThrowObjects() {
-        if (this.keyboard.D) {
+        if (this.keyboard.D && THROW_REQUEST_START > THROW_REQUEST_STOP) {
             if (this.bottles.energy_objects <= 0) {
                 return false;
             }
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
             this.throwableObjects.push(bottle);
+            THROW_REQUEST_STOP = new Date().getTime();
             if (this.bottles.energy_objects > 0) {
                 this.bottles.energy_objects -= 20;
                 this.statusBarBottles.setPercentage(this.bottles.energy_objects);
@@ -83,7 +84,7 @@ class World {
 
             setTimeout(() => {
                 location.reload();
-            }, 5000);
+            }, 10000);
         }
         this.level.enemies.forEach(enemy => {                                       //checkt für jeden Gegner ob er mit dem Character kollidiert
             if (this.is_play && this.character.isCollidingEndboss(this.endboss) || this.character.isColliding(enemy) && !this.character.makeChickenDead(enemy) && !enemy.energy == 0) {
